@@ -36,12 +36,22 @@ def article_list(request):
         else:
             article_list = ArticlePost.objects.all()
 
+    for article in article_list:
+        article.body = markdown.markdown(article.body,
+            extensions=[
+                'markdown.extensions.extra',
+                'markdown.extensions.codehilite',
+                # 目录扩展
+                # 'markdown.extensions.toc',
+            ])
+
     # 每页3篇文章
     paginator = Paginator(article_list, 3)
     # 获取url中的页码
     page = request.GET.get('page')
     # 将导航对象相应的页码内容返回给 articles
     articles = paginator.get_page(page)
+
 
     context = {'articles': articles, 'order': order, 'search': search}
     return render(request, 'article/list.html', context)
