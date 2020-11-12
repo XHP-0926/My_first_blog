@@ -23,7 +23,7 @@
                 <div>
                     浏览：{{ article.total_views }}
                 </div>
-
+                <!--隐藏表单的作用:通过jquery选择器找到隐藏表单，携带csrf令牌，发送POST请求，避免了csrf攻击-->
                 <form
                     style="display:none;"
                     id="safe_delete"
@@ -63,13 +63,13 @@
                 <br>
             {% endif %}
 
-            <!--显示评论-->
+            <!--显示评论    显示还有点问题，之后改善-->
             <h4>共有{{ comments.count }}条评论</h4>
             <div>
                 {% for comment in comments %}
                     <hr>
                     <p>
-                        <strong style="color: pink">{{ comment.user }}</strong>于
+                        <strong style="color: #2353d2">{{ comment.user }}</strong> 于
                         <span style="color: green">
                             {{ comment.created|date:"Y-m-d H:i:s" }}
                         </span>时评论：

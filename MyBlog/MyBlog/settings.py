@@ -26,7 +26,7 @@ SECRET_KEY = '$++8b&kk=c-=yyljv*6)#nje65a-_)9&xi&4=_+uvf2n9!n^nk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.xhpblog.top', '8.129.146.56']
 
 
 # Application definition
@@ -84,7 +84,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'myblog',
         'HOST': 'localhost',
-        'USER': 'root',
+        'USER': 'xhp',
         'PASSWORD': 'xhp2781303',
         'PORT': 3306,
     }
