@@ -15,12 +15,12 @@
     <nav aria-label="breadcrumb" style="margin-top: 1%;">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="{% url 'article:article_list' %}?search={{ search }}">
+                <a href="{% url 'article:article_list' %}?search={{ search }}&column={{ coulum }}">
                     最新
                 </a>
             </li>
             <li class="breadcrumb-item">
-                <a href="{% url 'article:article_list' %}?order=total_views&search={{ search }}">
+                <a href="{% url 'article:article_list' %}?order=total_views&search={{ search }}&column={{ coulum }}">
                     最热
                 </a>
             </li>
@@ -53,27 +53,62 @@
     <div class="row mt-2">
 
         {% for article in articles %}
-        <!-- 文章内容 -->
-        <div class="col-4 mb-4">
-        <!-- 卡片容器 -->
-            <div class="card h-100">
+            <!-- 标题图 -->
+            {% if article.avatar %}
+                <div class="col-3">
+                    <img src="{{ article.avatar.url }}" alt="avatar" style="max-width: 100%; border-radius: 20px;">
+                </div>
+            {% endif %}
+            <!-- 文章内容 -->
+            <div class="col-9">
+            <!-- 栏目 -->
+                {% if article.column %}
+                    <a href="{% url 'article:article_list' %}?column={{ article.column.id }}"
+                            class="btn btn-sm mb-2
+                                {% if article.column.title == 'Django' %}
+                                    btn-success
+                                {% elif article.column.title == 'HTML' %}
+                                    btn-danger
+                                {% elif article.column.title == 'Python' %}
+                                    btn-warning
+                                {% endif %}
+                              "
+                        >
+                        {{ article.column }}
+                    </a>
+                {% endif %}
+
                 <!-- 标题 -->
-                <h4 class="card-header">{{ article.title }}</h4>
+                <h4>
+                    <b>
+                        <a href="{% url 'article:article_detail' article.id %}" style="color: black;">
+                            {{ article.title }}
+                        </a>
+                    </b>
+                </h4>
                 <!-- 摘要 -->
-                <div class="card-body">
-                    <p class="card-text">{{ article.body|slice:'50'|safe }}...</p>
+                <div>
+                    <p style="color: gray;">
+                        {{ article.body|slice:'50'|safe }}...
+                    </p>
                 </div>
                 <!-- 注脚 -->
-                <div class="card-footer">
-                    <a href="{% url 'article:article_detail' article.id %}" class="btn btn-primary">阅读本文</a>
+                <p>
                     <span>
-                        <small class="col align-self-end" style="color: gray;">
-                            浏览：{{ article.total_views }}
-                        </small>
+                        <i class="fas fa-eye" style="color: royalblue;"></i>
+                        {{ article.total_views }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </span>
-                </div>
+                    <span>
+                        <i class="fas fa-comment-alt" style="color: limegreen;"></i>
+                        {{ article.comments.count }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </span>
+                    <span>
+                        <i class="fas fa-calendar" style="color: red;"></i>
+                        {{ article.created|date:'Y-m-d' }}
+                    </span>
+                </p>
             </div>
-        </div>
+            <hr style="width: 100%">
         {% endfor %}
 
     </div>
@@ -83,11 +118,11 @@
                 <span class="step-links">
                     <!-- 如果不是第一页，则显示上翻按钮 -->
                     {% if articles.has_previous %}
-                        <a href="?page=1&order={{ order }}&search={{ search }}" class="btn btn-success">
+                        <a href="?page=1&order={{ order }}&search={{ search }}&column={{ coulum }}" class="btn btn-success">
                             首页
                         </a>
                         <span>...</span>
-                        <a href="?page={{ articles.previous_page_number }}&order={{ order }}&search={{ search }}" class="btn btn-secondary">
+                        <a href="?page={{ articles.previous_page_number }}&order={{ order }}&search={{ search }}&column={{ coulum }}" class="btn btn-secondary">
                             {{ articles.previous_page_number }}
                         </a>
                     {% endif %}
@@ -99,11 +134,11 @@
 
                     <!-- 如果不是最末页，则显示下翻按钮 -->
                     {% if articles.has_next %}
-                        <a href="?page={{ articles.next_page_number }}&order={{ order }}&search={{ search }}" class="btn btn-secondary">
+                        <a href="?page={{ articles.next_page_number }}&order={{ order }}&search={{ search }}&column={{ coulum }}" class="btn btn-secondary">
                             {{ articles.next_page_number }}
                         </a>
                         <span>...</span>
-                        <a href="?page={{ articles.paginator.num_pages }}&order={{ order }}&search={{ search }}" class="btn btn-success">
+                        <a href="?page={{ articles.paginator.num_pages }}&order={{ order }}&search={{ search }}&column={{ coulum }}" class="btn btn-success">
                             尾页
                         </a>
                     {% endif %}

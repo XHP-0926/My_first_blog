@@ -21,5 +21,14 @@
         <property name="serverTimezone" value="Asia/Shanghai" />
       </driver-properties>
     </data-source>
+    <data-source source="LOCAL" name="myblog@localhost [2]" uuid="86f265ce-5983-4d29-b970-ab81b285a98f">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/myblog</jdbc-url>
+      <driver-properties>
+        <property name="serverTimezone" value="Asia/Shanghai" />
+      </driver-properties>
+    </data-source>
   </component>
 </project>
