@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '$++8b&kk=c-=yyljv*6)#nje65a-_)9&xi&4=_+uvf2n9!n^nk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['8.129.146.56']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition

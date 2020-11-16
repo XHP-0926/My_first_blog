@@ -65,15 +65,19 @@
                 {% if article.column %}
                     <a href="{% url 'article:article_list' %}?column={{ article.column.id }}"
                             class="btn btn-sm mb-2
-                                {% if article.column.title == 'Django' %}
-                                    btn-success
-                                {% elif article.column.title == 'HTML' %}
-                                    btn-danger
-                                {% elif article.column.title == 'Python' %}
+                                {% if article.column.id == 1 %}
+                                    btn-primary
+                                {% elif article.column.id == 2 %}
                                     btn-warning
+                                {% elif article.column.id == 3 %}
+                                    btn-success
+                                {% elif article.column.id == 4 %}
+                                    btn-danger
+                                {% else %}
+                                    btn-dark
                                 {% endif %}
                               "
-                        >
+                        >  <!-- 以上颜色为  蓝  黄  绿 红  黑-->
                         {{ article.column }}
                     </a>
                 {% endif %}
@@ -89,7 +93,7 @@
                 <!-- 摘要 -->
                 <div>
                     <p style="color: gray;">
-                        {{ article.body|slice:'50'|safe }}...
+                        {{ article.body|slice:'100'|safe }}...
                     </p>
                 </div>
                 <!-- 注脚 -->

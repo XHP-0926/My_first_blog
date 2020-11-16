@@ -62,7 +62,8 @@ def article_detail(request, id):
 
     comments = Comment.objects.filter(article=id).order_by('-created')
 
-    article.total_views += 1
+    if request.user != article.author:
+        article.total_views += 1
     # update_fields=[]指定了数据库只更新total_views字段，优化执行效率
     article.save(update_fields=['total_views'])
 
@@ -160,7 +161,8 @@ def article_update(request, id):
     else:
         article_post_form = ArticlePostForm()
         columns = ArticleColumn.objects.all()
-        context = {'article': article, 'article_post_form': article_post_form, 'column': columns}
+        # print(columns)
+        context = {'article': article, 'article_post_form': article_post_form, 'columns': columns}
         return render(request, 'article/update.html', context)
 
 
