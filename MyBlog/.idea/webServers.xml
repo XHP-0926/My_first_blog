@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="135e080a-32ed-4752-a0ec-3d10ecc9594f" name="阿里云" url="http://8.129.146.56">
+        <fileTransfer rootFolder="/home/xhp" accessType="SFTP" host="8.129.146.56" port="22" sshConfigId="1903fffe-2b8f-47ea-9924-633e9572d1e1" sshConfig="xhp@8.129.146.56:22 password">
+          <advancedOptions>
+            <advancedOptions controlEncoding="UTF-8" dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
